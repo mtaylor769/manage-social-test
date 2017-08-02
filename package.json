@@ -1,0 +1,15 @@
+{
+	"name": "manage-social-test",
+	"version": "1.0.0",
+	"description": "Manage Social Coding Test",
+	"main": "index.js",
+	"scripts": {
+		"start": "node twitter-example.js",
+		"test": "echo \"Run tests\" && exit 1"
+	},
+	"author": "Mike Taylor",
+	"license": "ISC",
+	"dependencies": {
+		"twit": "^2.2.5"
+	}
+}
