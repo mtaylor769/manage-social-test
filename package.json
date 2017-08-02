@@ -2,6 +2,7 @@
 	"name": "manage-social-test",
 	"version": "1.0.0",
 	"description": "Manage Social Coding Test",
+	"repository": "git+ssh:github.com:mtaylor769/manage-social-test.git",
 	"main": "index.js",
 	"scripts": {
 		"start": "node twitter-example.js",
