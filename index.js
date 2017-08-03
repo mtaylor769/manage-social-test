@@ -1,19 +1,30 @@
 const express = require('express')
-const twitter = require('twit')
+const Twit = require('twit')
 const app = express()
 app.locals.strftime = require('strftime')
 app.locals.title = 'ManageSocial Test'
 app.locals.email = 'mike@whatsmycut.com'
 
-var assert = require('chai').assert;
-
-
 app.get('/', function (req, res) {
-  res.send('Hello World!')
+  res.type('application/json')
+  res.send({
+    'status': 'success',
+    'data': [
+      {
+        'message': 'Hello World!',
+        'somekey': 'somevalue'
+      },
+      {
+        'message': 'Goodbye, cruel World!'
+        'somekey': 'someval'
+      }
+    ]
+  })
 })
 
 app.get('/oauth_request', function (req, res) {
-  res.send('oauth request!')
+  res.type('application/json')
+  res.send()
 })
 
 app.post('/connect', function(req, res){
@@ -28,7 +39,8 @@ app.post('/disconnect', function(req, res){
   res.send('disconnect!')
 })
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+app.listen(8080, function () {
+  console.log('Listening on port 8080.')
 })
 
+module.exports = app
