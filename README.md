@@ -1,30 +1,30 @@
-#ManageSocial Tech Task
+# ManageSocial Tech Task
 
 **Time:** Approx. 2 - 3 hours
 
 **Considerations:** We value the aesthetics of the code that applicants write. Consistency of style, code and tests that are as succinct as can be. Use variable names and comments that are appropriately descriptive.
 
-##User Story
+## User Story
 
 As a user, I would like to view a web app that authenticates with Twitter so that I can view a list of my recent tweets.
 
-##Acceptance Criteria 
+## Acceptance Criteria 
 
-###Backend (API)
+### Backend (API)
 
 - Given that I have made a request to GET /oauth_request endpoint I should receive a response with the Twitter authorisation URL
 - Given that I have made a request to POST /connect endpoint I should receive a response with all my Twitter profile data
 - Given that I have made a request to GET /tweets endpoint I should receive a response with a list containing `100` of my most recent tweets
 - Given that I have made a request to POST /disconnect endpoint I should be disconnected from Twitter and receive a response with my Twitter ID for confirmation
 
-###Frontend (SPA)
+### Frontend (SPA)
 
 - Given that I clicked on Login with Twitter button, I should be redirected to Twitter to login using my credentials
 - Given that I have authenticated with Twitter, I should be shown my name, username and profile picture, a Refresh Tweets button and a Logout button
 - Given that I clicked on Refresh Tweets, I should be shown a list containing 100 of my most recent tweets
 Given that I clicked on Logout, I should be disconnected from Twitter, storage should be cleared and the login button is displayed
               
- ###Additional Criteria
+ ### Additional Criteria
 
  Written using ES6 and demonstrating a knowledge of promises and using async/await or generators for using the asynchronous requests in a synchronous control flow. A functional programming approach is preferable where acceptable
 
