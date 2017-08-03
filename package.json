@@ -19,8 +19,11 @@
 		"react-bootstrap": "^0.31.2"
 	},
 	"devDependencies": {
-		"mocha": "^3.5.0",
+		"chai": "^4.1.0",
+		"chai-http": "^3.0.0",
+		"should": "^11.2.1",
 		"eslint": "^4.3.0",
-		"eslint-plugin-react": "^7.1.0"
+		"eslint-plugin-react": "^7.1.0",
+		"mocha": "^3.5.0"
 	}
 }
