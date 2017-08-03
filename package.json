@@ -5,14 +5,22 @@
 	"repository": "git+ssh:github.com:mtaylor769/manage-social-test.git",
 	"main": "index.js",
 	"scripts": {
-		"start": "node twitter-example.js",
-		"test": "echo \"Run tests\" && exit 0"
+		"start": "node index.js",
+		"test": "mocha"
 	},
 	"author": "Mike Taylor",
 	"license": "ISC",
 	"dependencies": {
+		"express": "^4.15.3",
+		"twit": "^2.2.9",
+		"strftime": "^0.10.0",
+		"react": "^15.6.1",
+		"react-dom": "^15.6.1",
+		"react-bootstrap": "^0.31.2"
+	},
+	"devDependencies": {
 		"mocha": "^3.5.0",
-		"twitter-api": "^1.0.4",
-		"upgrade": "^1.1.0"
+		"eslint": "^4.3.0",
+		"eslint-plugin-react": "^7.1.0"
 	}
 }
