@@ -33,12 +33,6 @@ app.get("/oauth_request", function (req, res) {
     console.log("caught error", err.stack)
   })
   .then(function (result) {
-    // `result` is an Object with keys "data" and "resp".
-    // `data` and `resp` are the same objects as the ones passed
-    // to the callback.
-    // See https://github.com/ttezel/twit#tgetpath-params-callback
-    // for details.
-
     console.log("data", result.data);
   })
   res.sendStatus(200)
@@ -56,8 +50,8 @@ app.post("/disconnect", function(req, res){
   res.send("disconnect!")
 })
 
-app.listen(8080, function () {
-  console.log("Listening on port 8080.")
+app.listen(33207, function () {
+  console.log("Listening on port 33207.")
 })
 
 module.exports = app
