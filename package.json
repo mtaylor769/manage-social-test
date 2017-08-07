@@ -11,15 +11,16 @@
 	"author": "Mike Taylor",
 	"license": "ISC",
 	"dependencies": {
-		"lodash": "^4.17.4",
-		"json": "^9.0.6",
+		"ejs": "^2.5.7",
 		"express": "^4.15.3",
-		"twit": "^2.2.9",
+		"json": "^9.0.6",
+		"lodash": "^4.17.4",
+		"react": "^15.6.1",
+		"react-bootstrap": "^0.31.2",
+		"react-dom": "^15.6.1",
 		"request": "^2.81.0",
 		"strftime": "^0.10.0",
-		"react": "^15.6.1",
-		"react-dom": "^15.6.1",
-		"react-bootstrap": "^0.31.2"
+		"twit": "^2.2.9"
 	},
 	"devDependencies": {
 		"chai": "^4.1.0",
