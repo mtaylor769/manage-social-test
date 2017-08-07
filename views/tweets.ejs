@@ -1,0 +1,8 @@
+<%- include('header') -%>
+TWEETS!
+<ul>
+  <% tweets.forEach(function(tweet){ %>
+    <%- include('tweet', {tweet: tweet}) %>
+  <% }); %>
+</ul>
+<%- include('footer') -%>
