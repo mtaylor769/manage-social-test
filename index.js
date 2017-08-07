@@ -35,7 +35,7 @@ app.get("/oauth_request", function (req, res) {
   .then(function (result) {
     console.log("data", result.data);
   })
-  res.sendStatus(200)
+  res.send(data)
 })
 
 app.post("/connect", function(req, res){
