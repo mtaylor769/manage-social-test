@@ -7,26 +7,14 @@ const app = express()
 app.locals.strftime = require("strftime")
 app.locals.title = "ManageSocial Test"
 app.locals.email = "mike@whatsmycut.com"
+app.set('view engine', 'ejs')
 
 const config = require("./config")
 const T = new Twit(config)
 let tcreds = []
 
 app.get("/", function (req, res) {
-  res.type("application/json")
-  res.send({
-    "status": "success",
-    "data": [
-      {
-        "message": "Hello World!",
-        "somekey": "somevalue"
-      },
-      {
-        "message": "Goodbye, cruel World!",
-        "somekey": "someval"
-      }
-    ]
-  })
+  res.render('login', { title: 'Manage Social Test', message: 'Hello there!' })
 })
 
 app.get("/oauth_request", function (req, res) {
@@ -70,21 +58,41 @@ app.get("/sign-in-with-twitter", function(req, res){
     })
   } else {
     tcreds.concat(res.query)
-    res.status(200).redirect('/tweets')
+    T.post('https://api.twitter.com/oauth/access_token', 
+      {
+        oauth_consumer_key: config.consumer_key,
+        oauth_nonce:"ea9ec8429b68d6b77cd5600adbbb0456",
+        oauth_signature:config.app_only_auth,
+        oauth_signature_method:"HMAC-SHA1",
+        oauth_timestamp:Date.now(),
+        oauth_version:"1.0",
+        oauth_token: tcreds['oauth_token'],
+        oauth_verifier: tcreds['oauth_verifier']
+      })
+    .catch(function (err) {
+      console.log("caught error", err.stack)
+    })
+    .then(function (result) {
+      console.log("posted result", result.data)
+      res.send(result.data)
+    })
+  
+  //  res.status(200).redirect('/tweets')
   }
 })
 
 app.post("/connect", function(req, res){
+  // TODO: Get User Creds
   console.log("connect: tcreds", tcreds)
-  res.send("connect!")
 })
 
 app.get("/tweets", function(req, res){
+  // TODO: Get Tweets
   console.log("tweets: tcreds", tcreds)
-  res.send("tweets!")
 })
 
 app.post("/disconnect", function(req, res){
+  // TODO: Disconnect user
   res.send("disconnect!")
 })
 
