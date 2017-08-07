@@ -57,7 +57,7 @@ app.get("/sign-in-with-twitter", function(req, res){
       res.send(result.data)
     })
   } else {
-    tcreds.concat(res.query)
+    //tcreds.concat(req.query)
     T.post('https://api.twitter.com/oauth/access_token', 
       {
         oauth_consumer_key: config.consumer_key,
@@ -66,15 +66,23 @@ app.get("/sign-in-with-twitter", function(req, res){
         oauth_signature_method:"HMAC-SHA1",
         oauth_timestamp:Date.now(),
         oauth_version:"1.0",
-        oauth_token: tcreds['oauth_token'],
-        oauth_verifier: tcreds['oauth_verifier']
+        oauth_token: req.query['oauth_token'],
+        oauth_verifier: req.query['oauth_verifier']
       })
     .catch(function (err) {
       console.log("caught error", err.stack)
     })
     .then(function (result) {
       console.log("posted result", result.data)
-      res.send(result.data)
+      let pairs = result.data.split('&')
+      let vals = []
+      _.each(pairs, function(t) {
+        let sp = t.split('=')
+        vals[sp[0]] = sp[1]
+      })
+      tcreds.concat(vals)
+      console.log(tcreds)
+      res.status(200).redirect('/tweets')
     })
   
   //  res.status(200).redirect('/tweets')
@@ -89,6 +97,7 @@ app.post("/connect", function(req, res){
 app.get("/tweets", function(req, res){
   // TODO: Get Tweets
   console.log("tweets: tcreds", tcreds)
+  res.render('tweets', {tweets: [{name: 'one'},{name: 'two'}]})
 })
 
 app.post("/disconnect", function(req, res){
