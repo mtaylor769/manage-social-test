@@ -129,8 +129,8 @@ app.post("/disconnect", function(req, res){
   res.send("disconnect!")
 })
 
-app.listen(app.locals.port, function () {
-  console.log("Listening on port " + app.locals.port)
+app.listen(8080, function () {
+  console.log("Listening on port 8080.")
 })
 
 module.exports = app
