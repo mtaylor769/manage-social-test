@@ -1,0 +1,8 @@
+li {
+  list-style-type: none;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  vertical-align: top;
+}
+.stream-item-header {vertical-align: top;}
