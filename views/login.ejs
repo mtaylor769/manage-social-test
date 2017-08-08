@@ -1,8 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
 <%- include('header') -%>
-<% if (title) { %>
-  <h1><%= title %></h1>
-<% } %>
+<body>
+  <div class="container">
+    <%- include('container_header') -%>
+    <div class="jumbotron">
+      <h1>Manage Social Test</h1>
+      <p class="lead">A simple app to see your latest Tweets</p>
+      <p><a class="btn btn-lg btn-success" href="/oauth_request" role="button">Log In</a></p>
+    </div>
+  </div>
+  <%- include('footer') -%>
+</body>
+
+
+
+
+
+
 <p>
 <a href="/oauth_request">Login</a>
 </p>
-<%- include('footer') -%>
+</html>

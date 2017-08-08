@@ -1,8 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
 <%- include('header') -%>
-<h3>TWEETS!
-<ul>
-  <% tweets.forEach(function(t){ %>
-    <%- include('tweet', {tweet: t}) %>
-  <% }); %>
-</ul>
-<%- include('footer') -%>
+<body>
+  <div class="container">
+    <%- include('container_header') -%>
+    <div class="jumbotron">
+      <h1>Manage Social Test</h1>
+      <p class="lead">A simple app to see your latest Tweets</p>
+      <p><a class="btn btn-lg btn-success" href="/connect" role="button">Profile</a></p>
+      <ul>
+        <% tweets.forEach(function(t){ %>
+          <%- include('tweet', {tweet: t}) %>
+        <% }); %>
+      </ul>
+    </div>
+  </div>
+  <%- include('footer') -%>
+</body>

@@ -1,3 +1,31 @@
-<li>
-  <%= tweet.text %>
+<li class="js-stream-item stream-item stream-item" >
+  <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable dismissible-content
+       original-tweet js-original-tweet      
+       has-cards cards-forward">
+    <div class="content">
+      <div class="content">
+        <div class="stream-item-header">
+        <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" 
+        href="/<%= tweet.user.screen_name %>" data-user-id="<%= tweet.user.id %>">
+          <img class="avatar js-action-profile-avatar" src="<%= tweet.user.profile_image_url_https %>" alt="">
+          <span class="FullNameGroup">
+            <strong class="fullname show-popup-with-id " data-aria-label-part=""><%= tweet.user.name %></strong>
+            <span>&rlm;</span>
+            <span class="UserBadges"></span>
+            <span class="UserNameBreak">&nbsp;</span>
+          </span>
+          <span class="username u-dir" dir="ltr" data-aria-label-part="">@<b><%= tweet.user.screen_name %></b></span></a>
+          <small class="time">
+            <a href="/<%= tweet.user.screen_name %>/status/<%= tweet.id %>" class="tweet-timestamp js-permalink js-nav js-tooltip" title="3:00 PM - 1 Aug 2017" data-conversation-id="<%= tweet.id %>"><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="[time]" data-long-form="true">[date]</span></a>
+          </small>
+        </div>
+      </div>
+      <div class="content">
+       <%= tweet.text %>
+      </div>
+    </div>
+  </div>
 </li>
+
+
+
