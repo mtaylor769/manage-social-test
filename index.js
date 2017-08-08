@@ -9,7 +9,7 @@ app.locals.title = "ManageSocial Test"
 app.locals.email = "mike@whatsmycut.com"
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
-app.locals.port = 33076
+app.locals.port = 33078
 //app.locals.port = 8080
 
 const config = require("./config")
