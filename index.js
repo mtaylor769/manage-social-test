@@ -8,6 +8,7 @@ app.locals.strftime = require("strftime")
 app.locals.title = "ManageSocial Test"
 app.locals.email = "mike@whatsmycut.com"
 app.set('view engine', 'ejs')
+app.use(express.static('public'))
 
 const config = require("./config")
 const T = new Twit(config)
@@ -86,9 +87,19 @@ app.get("/sign-in-with-twitter", function(req, res){
   }
 })
 
-app.post("/connect", function(req, res){
+
+app.get("/connect", function(req, res){
   // TODO: Get User Creds
-  console.log("connect: app.tcreds", app.tcreds)
+  //console.log("connect: app.tcreds", app.tcreds)
+  T.get('account/settings', app.tcreds, profileData)
+  function profileData(err, data) {
+    if (err) {
+      res.redirect("/")
+    }
+    // TODO: Add map function to regex @ and # urls
+    console.log(data)
+    res.send(data)  
+  }
 })
 
 app.get("/tweets", function(req, res){
@@ -99,7 +110,11 @@ app.get("/tweets", function(req, res){
   }
   T.get('statuses/user_timeline', params, searchedData);
 
-  function searchedData(err, data, response) {
+  function searchedData(err, data) {
+    if (err) {
+      res.redirect("/")
+    }
+    // TODO: Add map function to regex @ and # urls
     console.log(data)
     res.render('tweets', {"tweets": data})
   }
