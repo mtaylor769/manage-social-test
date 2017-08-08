@@ -9,6 +9,8 @@ app.locals.title = "ManageSocial Test"
 app.locals.email = "mike@whatsmycut.com"
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
+app.locals.port = 33076
+//app.locals.port = 8080
 
 const config = require("./config")
 const T = new Twit(config)
@@ -23,7 +25,7 @@ app.get("/oauth_request", function (req, res) {
   T.post("https://api.twitter.com/oauth/request_token", 
     { 
       skip_status: true, 
-      oauth_callback:"http%3A%2F%2F" + req.hostname + "%3A8080%2Fsign-in-with-twitter%2F",
+      oauth_callback:"http%3A%2F%2F" + req.hostname + "%3A"+ app.locals.port + "%2Fsign-in-with-twitter%2F",
       oauth_consumer_key: config.consumer_key,
       oauth_nonce:"ea9ec8429b68d6b77cd5600adbbb0456",
       oauth_signature:config.app_only_auth,
@@ -127,8 +129,8 @@ app.post("/disconnect", function(req, res){
   res.send("disconnect!")
 })
 
-app.listen(8080, function () {
-  console.log("Listening on port 8080.")
+app.listen(app.locals.port, function () {
+  console.log("Listening on port " + app.locals.port)
 })
 
 module.exports = app
