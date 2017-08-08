@@ -94,7 +94,7 @@ app.get("/connect", function(req, res){
   T.get('account/settings', app.tcreds, profileData)
   function profileData(err, data) {
     if (err) {
-      res.redirect("/")
+      //res.redirect("/")
     }
     // TODO: Add map function to regex @ and # urls
     console.log(data)
@@ -122,6 +122,8 @@ app.get("/tweets", function(req, res){
 
 app.post("/disconnect", function(req, res){
   // TODO: Disconnect user
+  app.tcreds = []
+  res.redirect("/")
   res.send("disconnect!")
 })
 
