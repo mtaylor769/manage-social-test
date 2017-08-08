@@ -11,7 +11,7 @@ app.set('view engine', 'ejs')
 
 const config = require("./config")
 const T = new Twit(config)
-let tcreds = []
+app.tcreds = []
 
 app.get("/", function (req, res) {
   res.render('login', { title: 'Manage Social Test', message: 'Hello there!' })
@@ -22,7 +22,7 @@ app.get("/oauth_request", function (req, res) {
   T.post("https://api.twitter.com/oauth/request_token", 
     { 
       skip_status: true, 
-      oauth_callback:"http%3A%2F%2Flocalhost%3A8080%2Fsign-in-with-twitter%2F",
+      oauth_callback:"http%3A%2F%2F" + req.hostname + "%3A8080%2Fsign-in-with-twitter%2F",
       oauth_consumer_key: config.consumer_key,
       oauth_nonce:"ea9ec8429b68d6b77cd5600adbbb0456",
       oauth_signature:config.app_only_auth,
@@ -40,16 +40,16 @@ app.get("/oauth_request", function (req, res) {
       let sp = t.split('=')
       vals[sp[0]] = sp[1]
     })
-    tcreds = vals
+    app.tcreds = vals
     res.status(302).redirect("/sign-in-with-twitter")
   })
   
 })
 
 app.get("/sign-in-with-twitter", function(req, res){
-  console.log("/sign-in-with-twitter called", req.query)
+  //console.log("/sign-in-with-twitter called", req.query)
   if (undefined === req.query['oauth_verifier']) {
-    T.get('https://api.twitter.com/oauth/authenticate', {'oauth_token': tcreds['oauth_token']})
+    T.get('https://api.twitter.com/oauth/authenticate', {'oauth_token': app.tcreds['oauth_token']})
     .catch(function (err) {
       console.log("caught error", err.stack)
     })
@@ -57,7 +57,6 @@ app.get("/sign-in-with-twitter", function(req, res){
       res.send(result.data)
     })
   } else {
-    //tcreds.concat(req.query)
     T.post('https://api.twitter.com/oauth/access_token', 
       {
         oauth_consumer_key: config.consumer_key,
@@ -73,15 +72,13 @@ app.get("/sign-in-with-twitter", function(req, res){
       console.log("caught error", err.stack)
     })
     .then(function (result) {
-      console.log("posted result", result.data)
       let pairs = result.data.split('&')
       let vals = []
-      _.each(pairs, function(t) {
+      _.map(pairs, function(t) {
         let sp = t.split('=')
         vals[sp[0]] = sp[1]
       })
-      tcreds.concat(vals)
-      console.log(tcreds)
+      app.tcreds = vals
       res.status(200).redirect('/tweets')
     })
   
@@ -91,13 +88,21 @@ app.get("/sign-in-with-twitter", function(req, res){
 
 app.post("/connect", function(req, res){
   // TODO: Get User Creds
-  console.log("connect: tcreds", tcreds)
+  console.log("connect: app.tcreds", app.tcreds)
 })
 
 app.get("/tweets", function(req, res){
   // TODO: Get Tweets
-  console.log("tweets: tcreds", tcreds)
-  res.render('tweets', {tweets: [{name: 'one'},{name: 'two'}]})
+  let params = { 
+    screen_name: app.tcreds['screen_name'],
+    count: 100 
+  }
+  T.get('statuses/user_timeline', params, searchedData);
+
+  function searchedData(err, data, response) {
+    console.log(data)
+    res.render('tweets', {"tweets": data})
+  }
 })
 
 app.post("/disconnect", function(req, res){
