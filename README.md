@@ -1,4 +1,5 @@
-# ManageSocial Tech Task
+# Node Express Twitter Client with oAuth login
+## derived from the following specifications:
 
 **Time:** Approx. 2 - 3 hours
 
